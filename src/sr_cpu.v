@@ -118,10 +118,6 @@ module sr_cpu
         .writeEnabled ( fifoPush     )             // --ADDED
     );
 
-    //sign extend
-    assign fifoIn[11:0] = (immU >> 20);            // --ADDED
-    assign fifoIn[31:12] = 0;                      // --ADDED
-
    // --ADDED
     fifo fifo(
         .clk  ( clk                   ),
