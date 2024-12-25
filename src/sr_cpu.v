@@ -121,7 +121,7 @@ module sr_cpu
    // --ADDED
     fifo fifo(
         .clk  ( clk                   ),
-        .din  ( aluSrc ? fifoIn : rd1 ),
+        .din  ( aluResult             ),
         .push ( fifoPush              ),
         .pop  ( fifoPop               ),
         .dout ( fifoOut               )
