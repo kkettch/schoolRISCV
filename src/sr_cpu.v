@@ -115,7 +115,7 @@ module sr_cpu
         .aluSrc       ( aluSrc       ),
         .wdSrc        ( wdSrc        ),
         .aluControl   ( aluControl   ),
-        .fifoPush ( fifoPush     )             // --ADDED
+        .fifoPush     ( fifoPush     )             // --ADDED
     );
 
    // --ADDED
