@@ -15,6 +15,7 @@ module fifo
     reg [PTR_WIDTH-1:0] write_pointer;
     reg read_flag, write_flag; 
     reg [DATA_WIDTH-1:0] mem [0:(2**PTR_WIDTH)-1];
+    integer i;
 
     assign empty = (read_pointer == write_pointer) && (read_flag == write_flag);
     assign full = (read_pointer == write_pointer) && (read_flag != write_flag);
@@ -39,7 +40,6 @@ module fifo
             read_pointer = (read_pointer + 1) % (1 << PTR_WIDTH);
             if (read_pointer == 0) read_flag = ~read_flag;  
         end
-
     end
 
     always @(*) begin

@@ -13,7 +13,7 @@
 `include "sr_cpu.vh"
 
 `ifndef SIMULATION_CYCLES
-    `define SIMULATION_CYCLES 20
+    `define SIMULATION_CYCLES 60
 `endif
 
 module sm_testbench;
@@ -116,7 +116,7 @@ module sm_testbench;
 
     always @ (posedge clk)
     begin
-        $write ("%5d  pc = %2h instr = %h a0 = %1d", 
+        $write ("%5d pc = %2h instr = %h a0 = %1d", 
                   cycle, sm_top.sm_cpu.pc, sm_top.sm_cpu.instr, sm_top.sm_cpu.rf.rf[10]);
         disasmInstr();
 

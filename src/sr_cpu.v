@@ -115,7 +115,7 @@ module sr_cpu
         .aluSrc       ( aluSrc       ),
         .wdSrc        ( wdSrc        ),
         .aluControl   ( aluControl   ),
-        .writeEnabled ( fifoPush     )             // --ADDED
+        .fifoPush ( fifoPush     )             // --ADDED
     );
 
    // --ADDED
@@ -183,7 +183,7 @@ module sr_control
     output reg       aluSrc,
     output reg [1:0] wdSrc,                     // --ADDED               
     output reg [2:0] aluControl,
-    output reg       writeEnabled               // --ADDED
+    output reg       fifoPush               // --ADDED
 );
     reg          branch;
     reg          condZero;
@@ -196,7 +196,7 @@ module sr_control
         aluSrc      = 1'b0;
         wdSrc       = 2'b00;
         aluControl  = `ALU_ADD;
-        writeEnabled  = 1'b0;
+        fifoPush  = 1'b0;
 
         casez( {cmdF7, cmdF3, cmdOp} )
             { `RVF7_ADD,  `RVF3_ADD,  `RVOP_ADD  } : begin regWrite = 1'b1; aluControl = `ALU_ADD;  end
@@ -211,7 +211,7 @@ module sr_control
             { `RVF7_ANY,  `RVF3_BEQ,  `RVOP_BEQ  } : begin branch = 1'b1; condZero = 1'b1; aluControl = `ALU_SUB; end
             { `RVF7_ANY,  `RVF3_BNE,  `RVOP_BNE  } : begin branch = 1'b1; aluControl = `ALU_SUB; end
 
-            { `RVF7_ANY,  `RVF3_PUSH, `RVOP_PUSH } : begin writeEnabled = 1'b1; aluControl = `ALU_NOOP; end  // --ADDED
+            { `RVF7_ANY,  `RVF3_PUSH, `RVOP_PUSH } : begin fifoPush = 1'b1; aluControl = `ALU_NOOP; end  // --ADDED
             { `RVF7_ANY,  `RVF3_POP,  `RVOP_POP  } : begin regWrite = 1'b1; wdSrc  = 2'b10; end              // --ADDED
         endcase
     end
